@@ -1,4 +1,0 @@
-1 parser_utils free
-2 expander birlestirilmesi
-3 TOKEN control only_single_command'a lazim
-4 
