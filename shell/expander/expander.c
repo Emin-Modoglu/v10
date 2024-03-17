@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atasyure <atasyure@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmodogl <rootkalixox@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 05:23:06 by atasyure          #+#    #+#             */
-/*   Updated: 2024/03/15 22:16:30 by atasyure         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:22:40 by emmodogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,6 @@ void	handle_dollar(t_mini *mini, t_list *lex, char **temp, char *before)
 		expand_dollar_variable(mini, lex, temp, before);
 	else
 		*temp = ft_strchr(*temp + 1, '$');
-}
-
-void	expand_tilde(t_mini *mini)
-{
-	t_list	*lex;
-
-	lex = mini->lex_list->lex;
-	while (lex)
-	{
-		//if (((char *)lex->content)[0] == '~')
-		if (*((char *)(lex->content)) == '~') //changed
-			expander_tilde(mini, lex);
-		lex = lex->next;
-	}
-}
-
-void	expand_dollar(t_mini *mini)
-{
-	t_list	*lex;
-
-	lex = mini->lex_list->lex;
-	while (lex)
-	{
-		expand_dollar_internal(mini, lex);
-		lex = lex->next;
-	}
 }
 
 void	expand_dollar_internal(t_mini *mini, t_list *lex)
@@ -68,8 +42,15 @@ void	expand_dollar_internal(t_mini *mini, t_list *lex)
 
 void	expander(t_mini *mini)
 {
-	expand_tilde(mini);
-	if(mini->cmd[0] == '<' && mini->cmd[1] == '<')
-		return ;
-	expand_dollar(mini);
+	t_list *lex;
+
+	lex = mini->lex_list->lex;
+	while (lex)
+	{
+		if (*((char *)(lex->content)) == '~')
+			expander_tilde(mini, lex);
+		else
+			expand_dollar_internal(mini, lex);
+		lex = lex->next;
+	}
 }

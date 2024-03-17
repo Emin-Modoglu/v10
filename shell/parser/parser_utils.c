@@ -6,7 +6,7 @@
 /*   By: emmodogl <rootkalixox@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 05:24:14 by atasyure          #+#    #+#             */
-/*   Updated: 2024/03/15 20:28:32 by emmodogl         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:18:41 by emmodogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_parse	*parse_init(size_t len)
 	(parse)->cmd = NULL;
 	(parse)->text = ft_calloc(sizeof(char *), len + 1);
 	if (!(parse)->text)
-		return (NULL);
+		return (free(parse), NULL);
 	(parse)->type = 0;
 	(parse)->infile = STDINN;
 	(parse)->outfile = STDOUT;

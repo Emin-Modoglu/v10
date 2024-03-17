@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atasyure <atasyure@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmodogl <rootkalixox@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 05:22:38 by atasyure          #+#    #+#             */
-/*   Updated: 2024/03/16 06:25:35 by atasyure         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:13:26 by emmodogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	only_single_command(char **env, t_parse *parse, t_mini *m_mini)
 	int	control;
 
 	control = 0;
-	if (parse->type != HEREDOC)
+	if (parse->type != HEREDOC && parse->type != PIPE)
 		control = is_builtin(parse);
 	if (control)
 		execute_builtin_command(m_mini->parse, m_mini);
@@ -46,7 +46,7 @@ void	only_single_command(char **env, t_parse *parse, t_mini *m_mini)
 void	multi_command_(t_parse *parse, char **env, t_mini *m_mini, int *fd)
 {
 	t_parse	*nparse;
-
+	int	i = 0;
 	while (parse)
 	{
 		if (parse->next)
@@ -57,6 +57,9 @@ void	multi_command_(t_parse *parse, char **env, t_mini *m_mini, int *fd)
 		{
 			create_dup_one(parse, fd);
 			run_command(env, parse, fd, m_mini);
+			++i;
+			if (i == 1)
+				exit(0);
 		}
 		if (nparse)
 			create_dup_two(nparse, fd);

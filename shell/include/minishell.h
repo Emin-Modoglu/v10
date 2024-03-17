@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atasyure <atasyure@student.42.fr>          +#+  +:+       +#+        */
+/*   By: emmodogl <rootkalixox@gmail.com>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 05:24:08 by atasyure          #+#    #+#             */
-/*   Updated: 2024/03/16 01:56:48 by atasyure         ###   ########.fr       */
+/*   Updated: 2024/03/17 07:17:16 by emmodogl         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,6 @@ void				other_out_files_meta(t_parse *parse, t_mini *m_mini);
 void				handle_relative_path(char **pwd, t_parse *current_parse);
 int					create_in_files_meta(t_parse *parse, t_mini *mini);
 void				start_minishell(t_mini *mini, char **env, int control);
-void				expand_tilde(t_mini *mini);
-void				expand_dollar(t_mini *mini);
 void				expand_dollar_internal(t_mini *mini, t_list *lex);
 int					init(t_mini **mini);
 void				expander_tilde(t_mini *mini, t_list *lex);
